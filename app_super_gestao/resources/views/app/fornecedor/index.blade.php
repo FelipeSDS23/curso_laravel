@@ -16,8 +16,11 @@
                 <li><a href="{{ route('app.fornecedor') }}">Consulta</a></li>
             </ul>
         </div>
-
+        
         <div class="informacao-pagina">
+            <div>
+                {{ $msg ?? '' }}
+            </div>
             <div style="width: 30%; margin: auto;">
                 <form action="{{ route('app.fornecedor.listar') }}" method="POST">
                     @csrf
