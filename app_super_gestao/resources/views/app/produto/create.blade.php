@@ -19,23 +19,8 @@
 
         <div class="informacao-pagina">
             <div style="width: 30%; margin: auto;">
-                <form action="{{ route('produto.store') }}" method="POST">
-                    @csrf
-                    <input type="text" name="nome" placeholder="Nome" class="borda-preta" value="{{ old('nome') }}">
-                    {{ $errors->has('nome') ? $errors->first('nome') : '' }}
-                    <input type="text" name="descricao" placeholder="Descrição" class="borda-preta" value="{{ old('descricao') }}">
-                    {{ $errors->has('descricao') ? $errors->first('descricao') : '' }}
-                    <input type="text" name="peso" placeholder="Peso" class="borda-preta" value="{{ old('peso') }}">
-                    {{ $errors->has('peso') ? $errors->first('peso') : '' }}
-                    <select name="unidade_id">
-                        <option>-- Selecione a Unidade de Medida --</option>
-                        @foreach ($unidades as $unidade)
-                        <option value="{{ $unidade->id }}" {{ old('unidade_id') == $unidade->id ? 'selected' : '' }}>{{ $unidade->descricao }}</option>
-                        @endforeach
-                    </select>
-                    {{ $errors->has('unidade_id') ? $errors->first('unidade_id') : '' }}
-                    <button type="submit" class="borda-preta">Cadastrar</button>
-                </form>
+                @component('app.produto._components.form_create_edit', ['unidades' => $unidades])
+                @endcomponent
             </div>
         </div>
 
