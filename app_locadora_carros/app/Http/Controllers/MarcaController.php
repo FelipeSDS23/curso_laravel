@@ -18,7 +18,8 @@ class MarcaController extends Controller
     {
         // $marcas = Marca::all();
         $marcas = $this->marca->all();
-        return $marcas;
+        
+        return response()->json($marcas, 200);
     }
 
     /**
@@ -28,7 +29,8 @@ class MarcaController extends Controller
     {
         // $marca = Marca::create($request->all());
         $marca = $this->marca->create($request->all());
-        return $marca;
+
+        return response()->json($marca, 201);
     }
 
     /**
@@ -38,12 +40,12 @@ class MarcaController extends Controller
     public function show($id)
     {
         $marca = $this->marca->find($id);
+
         if($marca === null) {
-            return [
-                'erro' => 'Recurso pesquisado não existe'
-            ];
+            return response()->json(['erro' => 'Recurso pesquisado não existe'], 404);
         }
-        return $marca;
+
+        return response()->json($marca, 200);
     }
 
     /**
@@ -54,13 +56,14 @@ class MarcaController extends Controller
     {
         // $marca->update($request->all());
         $marca = $this->marca->find($id);
+
         if(!$marca) {
-            return [
-                'erro' => 'Impossível realizar a atualização. O recurso solicitado não existe'
-            ];
+            return response()->json(['erro' => 'Impossível realizar a atualização. O recurso solicitado não existe'], 404);
         }
+
         $marca->update($request->all());
-        return $marca;
+        
+        return response()->json($marca, 200);
     }
 
     /**
@@ -70,12 +73,13 @@ class MarcaController extends Controller
     public function destroy($id)
     {
         $marca = $this->marca->find($id);
+
         if(!$marca) {
-            return [
-                'erro' => 'Impossível realizar a exclusão. O recurso solicitado não existe'
-            ];
+            return response()->json(['erro' => 'Impossível realizar a exclusão. O recurso solicitado não existe'], 404);
         }
+
         $marca->delete();
-        return ['msg' => 'A marca foi removida com sucesso!'];
+
+        return response()->json(['msg' => 'A marca foi removida com sucesso!'], 200);
     }
 }
