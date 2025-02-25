@@ -11,6 +11,7 @@ class MarcaController extends Controller
     public function __construct(Marca $marca) {
         $this->marca = $marca;
     }
+
     /**
      * Display a listing of the resource.
      */
@@ -27,6 +28,8 @@ class MarcaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate($this->marca->rules(), $this->marca->feedback());
+
         // $marca = Marca::create($request->all());
         $marca = $this->marca->create($request->all());
 
@@ -60,6 +63,8 @@ class MarcaController extends Controller
         if(!$marca) {
             return response()->json(['erro' => 'Impossível realizar a atualização. O recurso solicitado não existe'], 404);
         }
+
+        $request->validate($marca->rules(), $this->marca->feedback());
 
         $marca->update($request->all());
         
