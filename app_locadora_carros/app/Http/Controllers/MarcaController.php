@@ -31,7 +31,8 @@ class MarcaController extends Controller
         $request->validate($this->marca->rules(), $this->marca->feedback());
 
         // $marca = Marca::create($request->all());
-        $marca = $this->marca->create($request->all());
+        // $marca = $this->marca->create($request->all());
+        dd($request->imagem);
 
         return response()->json($marca, 201);
     }
