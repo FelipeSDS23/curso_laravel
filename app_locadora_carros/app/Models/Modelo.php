@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Marca;
 
 class Modelo extends Model
 {
@@ -25,5 +26,10 @@ class Modelo extends Model
             2) nome da coluna que será pesquisada na tabela
             3) id do registro que será desconsiderado na pesquisa
         */
+    }
+
+    public function marca() {
+        //Um modelo pertence a uma marca
+        return $this->belongsTo(Marca::class);
     }
 }
